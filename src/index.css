@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force sections to be transparent so the canvas scroll animation shows through */
+section, footer, main, header, nav {
+  background-color: transparent !important;
+}
