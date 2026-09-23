@@ -15,10 +15,13 @@ export const BackgroundAnimation: React.FC = () => {
     // they are served directly.
     const currentFrame = (index: number) => `/${index.toString().padStart(4, '0')}.jpg`;
 
+    const images: HTMLImageElement[] = [];
+
     const preloadImages = () => {
       for (let i = 1; i <= frameCount; i++) {
         const img = new Image();
         img.src = currentFrame(i);
+        images[i] = img;
       }
     };
 
@@ -35,9 +38,13 @@ export const BackgroundAnimation: React.FC = () => {
 
     const updateImage = (index: number) => {
       if (index === lastFrameIndex) return;
-      lastFrameIndex = index;
-      img.src = currentFrame(index);
-      ctx.drawImage(img, 0, 0);
+      
+      const targetImg = images[index];
+      if (targetImg && targetImg.complete && targetImg.naturalWidth !== 0) {
+        // Image is fully loaded, safe to draw
+        lastFrameIndex = index;
+        ctx.drawImage(targetImg, 0, 0);
+      }
     }
 
     const handleScroll = () => {
